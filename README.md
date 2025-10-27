@@ -51,12 +51,12 @@ ReAct_Agent/
 
 
 ## Setup and Running:
-()()()
+(((
 git clone <repo_url>
 cd REACT_AGENT
 uv venv
 source .venv/bin/activate
-()()()
+)))
 
 # Installing Requirements
 ()()()
