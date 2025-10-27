@@ -2,7 +2,7 @@ ReAct_Agent is a modular, multi-layered AI Agent Framework built with LangGraph,
 It demonstrates a complete end-to-end conversational AI workflow — including agent orchestration, semantic reasoning, and three-level caching for maximum performance.
 
 
-Environment Set-Up
+## Environment Set-Up
 
 Create .env file with following Parameters:
 
@@ -50,15 +50,23 @@ ReAct_Agent/
 └── requirements.txt
 
 
-Setup and Running:
-
+## Setup and Running:
+()()()
 git clone <repo_url>
 cd REACT_AGENT
 uv venv
 source .venv/bin/activate
+()()()
 
+# Installing Requirements
+()()()
 uv pip install -r requirements.txt or python pip install -r requirements.txt
+()()()
 
+
+# Running Application:
+
+uv run python llm_test.py
 
 **
 Run Agent :
