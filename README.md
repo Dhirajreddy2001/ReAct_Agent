@@ -6,14 +6,14 @@ It demonstrates a complete end-to-end conversational AI workflow — including a
 
 Create .env file with following Parameters:
 
-# Model configuration
+#Model configuration
 #MODEL_STRING=bedrock_converse:us.anthropic.claude-3-5-haiku-20241022-v1:0
 
 MODEL_STRING=us.anthropic.claude-3-5-haiku-20241022-v1:0
 MODEL_MAX_TOKENS=3000
 
 
-# AWS Bedrock credentials
+#AWS Bedrock credentials
 AWS_ACCESS_KEY_ID=
 AWS_SECRET_ACCESS_KEY=
 AWS_REGION=us-east-1
