@@ -1,0 +1,60 @@
+services:
+  otel-collector:
+    image: otel/opentelemetry-collector:0.106.0
+    container_name: react-agent-otel-collector
+    command: ["--config=/etc/otelcol/config.yaml"]
+    volumes:
+      - ./otel-collector.yaml:/etc/otelcol/config.yaml:ro
+    ports:
+      - "4318:4318"
+      - "9464:9464"
+      - "8888:8888"            # expose internal telemetry to others
+    networks:
+      observability:
+        aliases: [otel-collector]   # <-- DNS name Prometheus will use
+    depends_on: [jaeger]
+
+  prometheus:
+    image: prom/prometheus:v2.54.1
+    container_name: react-agent-prometheus
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.path=/prometheus
+      - --web.enable-lifecycle
+    volumes:
+      - ./observability/prometheus:/etc/prometheus:ro
+    ports:
+      - "9090:9090"
+    networks:
+      observability: {}
+
+  grafana:
+    image: grafana/grafana:11.2.0
+    container_name: react-agent-grafana
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=Password123
+    volumes:
+      - grafana-data:/var/lib/grafana
+    ports:
+      - "3000:3000"
+    networks:
+      observability: {}
+
+  jaeger:
+    image: jaegertracing/all-in-one:1.57
+    container_name: react-agent-jaeger
+    environment: [COLLECTOR_OTLP_ENABLED=true]
+    ports:
+      - "16686:16686"
+      - "14268:14268"
+      - "14250:14250"
+      - "4317:4317"
+    networks:
+      observability: {}
+
+networks:
+  observability: {}     # <— one shared network
+
+volumes:
+  grafana-data:

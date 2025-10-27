@@ -1,0 +1,36 @@
+receivers:
+  otlp:
+    protocols:
+      http:
+        endpoint: 0.0.0.0:4318
+      grpc:
+        endpoint: 0.0.0.0:4319
+
+processors:
+  batch: {}
+
+exporters:
+  # traces/metrics to Jaeger via OTLP gRPC (Jaeger all-in-one exposes :4317)
+  otlp:
+    endpoint: jaeger:4317
+    tls:
+      insecure: true
+
+  # expose Prometheus scrape endpoint on :9464
+  prometheus:
+    endpoint: 0.0.0.0:9464
+    namespace: react_agent
+
+service:
+  telemetry:
+    metrics:
+      address: 0.0.0.0:8888        # collector’s own metrics (so Prom can scrape)
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [otlp]
+    metrics:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [prometheus]

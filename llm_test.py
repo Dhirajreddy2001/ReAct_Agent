@@ -4,6 +4,11 @@ from config.logging import setup_logging
 from cache.agent_instance import get_agent
 from nodes.utils import as_text  # ✅ reuse the shared utility
 
+
+""" Adding Telemetry """
+from observability.telemetry import init_telemetry
+init_telemetry()
+
 EXIT_WORDS = {"exit", "end", "quit", "q"}
 
 def main():

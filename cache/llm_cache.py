@@ -1,8 +1,8 @@
 # cache/llm_cache.py
 import os
 from typing import Any, Optional
-from langchain.globals import set_llm_cache
-from langchain.cache import SQLiteCache
+from langchain_core.globals import set_llm_cache
+from langchain_community.cache import SQLiteCache
 from langchain_core.caches import BaseCache
 
 DEBUG_CACHE = os.getenv("DEBUG_CACHE", "false").lower() == "true"
