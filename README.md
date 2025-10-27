@@ -51,17 +51,17 @@ ReAct_Agent/
 
 
 ## Setup and Running:
-(((
+
 git clone <repo_url>
 cd REACT_AGENT
 uv venv
 source .venv/bin/activate
-)))
+
 
 # Installing Requirements
-()()()
+
 uv pip install -r requirements.txt or python pip install -r requirements.txt
-()()()
+
 
 
 # Running Application:
